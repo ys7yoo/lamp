@@ -2,8 +2,8 @@
 from __future__ import division
 from __future__ import print_function
 """
-This file serves as an example of how to 
-a) select a problem to be solved 
+This file serves as an example of how to
+a) select a problem to be solved
 b) select a network type
 c) train the network to minimize recovery MSE
 
@@ -21,7 +21,8 @@ tf.set_random_seed(1) # on the other hand, this is basically useless (see issue 
 from tools import problems,networks,train
 
 # Create the basic problem structure.
-prob = problems.bernoulli_gaussian_trial(kappa=None,M=250,N=500,L=1000,pnz=.1,SNR=40) #a Bernoulli-Gaussian x, noisily observed through a random matrix
+#prob = problems.bernoulli_gaussian_trial(kappa=None,M=250,N=500,L=1000,pnz=.1,SNR=40) #a Bernoulli-Gaussian x, noisily observed through a random matrix
+prob = problems.bernoulli_gaussian_trial(kappa=0,M=250,N=500,L=1000,pnz=.1,SNR=40) #a Bernoulli-Gaussian x, noisily observed through a random matrix
 #prob = problems.random_access_problem(2) # 1 or 2 for compressive random access or massive MIMO
 
 # build a LISTA network to solve the problem and get the intermediate results so we can greedily extend and then refine(fine-tune)
