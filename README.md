@@ -52,15 +52,20 @@ Using the .mat files created by save_problem.py, this octave/matlab script tests
 
 e.g.
 ```
-octave:1> ista_fista_amp
+>> ista_fista_amp
 loaded Gaussian A problem
-AMP reached NMSE=-35dB at iteration 25
-AMP terminal NMSE=-36.7304 dB
+AMP reached NMSE=-35dB at iteration 26
+AMP terminal NMSE=-36.7865 dB
 FISTA reached NMSE=-35dB at iteration 202
-FISTA terminal NMSE=-36.7415 dB
-ISTA reached NMSE=-35dB at iteration 3420
-ISTA terminal NMSE=-36.7419 dB
+FISTA terminal NMSE=-36.8365 dB
+ISTA reached NMSE=-35dB at iteration 3754
+ISTA terminal NMSE=-36.8367 dB
 ```
+
+![MMSE-vs-itr.png](results/MMSE-vs-itr.png)
+
+![QQ.png](results/QQ.png)
+
 
 ## [LISTA.py](LISTA.py)
 
