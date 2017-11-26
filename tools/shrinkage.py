@@ -179,7 +179,7 @@ def get_shrinkage_function(name):
 			'expo':(shrink_expo, (2.5,.9,-1) ),
 			'spline':(shrink_spline, (3.7,.9,-1.5))
 		}[name]
-	except KeyError,ke:
+	except KeyError as ke:
 		raise ValueError('unrecognized shrink function %s' % name)
 		sys.exit(1)
 
@@ -246,7 +246,7 @@ def test_func(shrink_func,theta,**kwargs):
 
     tf.reset_default_graph()
     estname = re.sub('.*shrink_([^ ]*).*','\\1', repr(shrink_func) )
-    print '####   %s loss=%g \ttheta=%s' % (estname,loss_cur,repr(theta))
+    print('####   %s loss=%g \ttheta=%s' % (estname,loss_cur,repr(theta)))
     if False:
         import matplotlib.pyplot as plt
         plt.figure(1)
@@ -278,7 +278,7 @@ def show_shrinkage(shrink_func,theta,**kwargs):
     plt.figure(1)
     plt.plot(r.reshape(-1),r.reshape(-1),'y')
     plt.plot(r.reshape(-1),xhat.reshape(-1),'b')
-    if kwargs.has_key('title'):
+    if 'title' in kwargs:
         plt.suptitle(kwargs['title'])
     plt.show()
 
@@ -294,18 +294,18 @@ if __name__ == "__main__":
     try:
         opts,args = getopt.getopt(sys.argv[1:] , 'hp:s:f:')
         opts = dict(opts)
-    except getopt.GetoptError,e:
+    except getopt.GetoptError as e:
         opts={'-h':True}
-    if opts.has_key('-h'):
+    if '-h' in opts:
         sys.stderr.write(usage)
         sys.exit()
 
     shrinkage_name = opts.get('-f','soft')
     f,theta = get_shrinkage_function( shrinkage_name )
-    if opts.has_key('-s'):
-        D=dict(np.load(opts['-s']).items())
+    if '-s' in opts:
+        D=dict(list(np.load(opts['-s']).items()))
         t=0
-        while D.has_key('theta_%d'% t):
+        while 'theta_%d'% t in D:
             theta_t = D['theta_%d' % t]
             show_shrinkage(f,theta_t,title='shrinkage=%s, theta_%d=%s' % (shrinkage_name,t, theta_t))
             t += 1

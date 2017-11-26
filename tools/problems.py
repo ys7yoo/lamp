@@ -1,6 +1,6 @@
 #!/usr/bin/python
-from __future__ import division
-from __future__ import print_function
+
+
 import numpy as np
 import numpy.linalg as la
 import math
@@ -30,7 +30,8 @@ class NumpyGenerator(Generator):
         return self.p.genYX(self.nbatches,self.nsubprocs)
 
 
-def bernoulli_gaussian_trial(M=250,N=500,L=1000,pnz=.1,kappa=None,SNR=40):
+#def bernoulli_gaussian_trial(M=250,N=500,L=1000,pnz=.1,kappa=None,SNR=40):
+def bernoulli_gaussian_trial(M=250,N=500,L=1000,pnz=.1,kappa=0,SNR=40):
 
     A = np.random.normal(size=(M, N), scale=1.0 / math.sqrt(M)).astype(np.float32)
     if kappa >= 1:
@@ -58,7 +59,7 @@ def bernoulli_gaussian_trial(M=250,N=500,L=1000,pnz=.1,kappa=None,SNR=40):
     return prob
 
 def random_access_problem(which=1):
-    import raputil as ru
+    from . import raputil as ru
     if which == 1:
         opts = ru.Problem.scenario1()
     else:

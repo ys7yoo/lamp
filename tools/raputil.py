@@ -5,7 +5,8 @@ import math
 import os
 import time
 import numpy.linalg as la
-from tfinterp import interp1d_
+from . import tfinterp
+#from tfinterp import interp1d_
 sqrt=np.sqrt
 pi = math.pi
 
@@ -153,7 +154,7 @@ class Problem(object):
                 if c==0:
                     dist = abs( hexagonal_uniform( K ,as_complex=True) )
                 elif 0<c<7:
-                    dist = abs( 2+hexagonal_uniform( K ,as_complex=True) ) 
+                    dist = abs( 2+hexagonal_uniform( K ,as_complex=True) )
                 else:
                     assert False,'assuming 1 or 7 hexagonal cells'
                 dist.shape = (K,1,1)
