@@ -1,4 +1,4 @@
-% simulation parameters
+%% simulation parameters
 
 % if you do not have these .mat files, run:
 %       python save_problem.py      
@@ -63,7 +63,7 @@ else
     %lam_mf = max(abs(Bmf*(y-A*xhat))); % another way to compute lam for lasso
 end
 
-% run FISTA
+%% run FISTA
 scale = .999/norm(Bmf*A);
 B = scale*Bmf;
 xhat = zeros(N,L); % initialization of signal estimate
@@ -95,7 +95,7 @@ xhat_fista_mf = xhat;
 fprintf('FISTA terminal NMSE=%.4f dB\n', 10*log10(mean(nmse_fista(end,:))) );
 lam_mf_test = max(abs(Bmf*(y-A*xhat))); % another way to compute lam for lasso
 
-% run ISTA
+%% run ISTA
 xhat = zeros(N,L); % initialization of signal estimate
 nmse_ista = [ones(1,L);zeros(Tii,L)];
 qq = true;
@@ -123,7 +123,7 @@ xhat_ista_mf = xhat;
 fprintf('ISTA terminal NMSE=%.4f dB\n', 10*log10(mean(nmse_ista(end,:))) );
 lam_mf_test = max(abs(Bmf*(y-A*xhat))); % another way to compute lam for lasso
 
-% plot results
+%% plot results
 figure(1)
 handy = semilogx([0:Tii],10*log10(mean(nmse_ista,2)),'b.-',...
          [0:Ti],10*log10(mean(nmse_fista,2)),'g.-',...
@@ -134,3 +134,19 @@ ylabel('NMSE [dB]')
 xlabel('iterations')
 grid on
 title(['N=',num2str(N),', M=',num2str(M),', E[K]=',num2str(K),', SNRdB=',num2str(SNRdB_test),', MMV=',num2str(L)])
+
+%% save plots
+
+set(1, 'paperposition', [0 0 6 4.5])
+set(1, 'papersize', [6 4.5])
+saveas(1, 'MMSE-vs-itr.pdf')
+saveas(1, 'MMSE-vs-itr.png')
+
+set(2, 'paperposition', [0 0 9 3.5])
+set(2, 'papersize', [9 3.5])
+saveas(2, 'QQ.pdf')
+saveas(2, 'QQ.png')
+
+
+
+
