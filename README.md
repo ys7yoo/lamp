@@ -37,6 +37,15 @@ Creates numpy archives (.npz) and matlab (.mat) files with (y,x,A) for the spars
 These files are not really necessary for any of the deep-learning scripts, which generate the problem on demand.
 They are merely provided for better understanding the specific realizations used in the experiments.
 
+```
+$ python3 save_problem.py
+saving problem_Giid.mat,problem_Giid.npz norm(x)=224.5516663 norm(y)=224.0477230
+saving problem_k15.mat,problem_k15.npz norm(x)=224.4524994 norm(y)=224.3352588
+saving problem_k100.mat,problem_k100.npz norm(x)=224.2500458 norm(y)=224.0362651
+saving problem_rap1.mat,problem_rap1.npz norm(x)=276.4882507 norm(y)=289.9351196
+saving problem_rap2.mat,problem_rap2.npz norm(x)=89.6196136 norm(y)=90.3195496
+```
+
 ## [ista_fista_amp.m](ista_fista_amp.m)
 
 Using the .mat files created by save_problem.py, this octave/matlab script tests the performance of non-learned algorithms ISTA, FISTA, and AMP.
