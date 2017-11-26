@@ -25,7 +25,7 @@ nmse_dB_report = -35;
 eta = @(r,lam) sign(r).*max(bsxfun(@minus,abs(r),lam),0); 
 tqq = 10; tqqi = 100; tqqii = 1000; % iteration for qqplot 
 
-% run AMP
+%% run AMP
 Bmf = A'; % matched filter 
 xhat = zeros(N,L); % initialization of signal estimate
 v = zeros(M,L); % initialization of residual
@@ -39,7 +39,7 @@ for t=1:T
   rvar = sum(abs(v).^2,1)/M; % denoiser input err var
   xhat = eta(rhat, alf*sqrt(rvar)); % estimate
   nmse_amp(t+1,:) = sum(abs(xhat-x).^2,1)./sum(abs(x).^2,1);
-  if qq&(mean(nmse_amp(t+1,:))<0.1), 
+  if qq && (mean(nmse_amp(t+1,:))<0.1) 
     figure(2)
     subplot(131); 
     qqplot(rhat(:,1)-x(:,1)); 
@@ -77,7 +77,7 @@ for t=1:Ti
   xhat_old = xhat;
   xhat = eta(rhat, lam_mf*scale); % estimate
   nmse_fista(t+1,:) = sum(abs(xhat-x).^2,1)./sum(abs(x).^2,1);
-  if qq&&(mean(nmse_fista(t+1,:))<0.1), 
+  if qq&&(mean(nmse_fista(t+1,:))<0.1)
     figure(2)
     subplot(132); 
     qqplot(rhat(:,1)-x(:,1)); 
@@ -105,7 +105,7 @@ for t=1:Tii
   rhat = xhat + B*v; % denoiser input
   xhat = eta(rhat, lam_mf*scale); % estimate
   nmse_ista(t+1,:) = sum(abs(xhat-x).^2,1)./sum(abs(x).^2,1);
-  if qq&&(mean(nmse_ista(t+1,:))<0.1), 
+  if qq && (mean(nmse_ista(t+1,:))<0.1)
     figure(2)
     subplot(133); 
     qqplot(rhat(:,1)-x(:,1)); 
@@ -114,7 +114,7 @@ for t=1:Tii
     drawnow;
     qq = false;
   end
-  if report&&(mean(nmse_ista(t+1,:))<10^(nmse_dB_report/10)), 
+  if report&&(mean(nmse_ista(t+1,:))<10^(nmse_dB_report/10))
     fprintf('ISTA reached NMSE=%ddB at iteration %i\n',nmse_dB_report,t);
     report = false;
   end
